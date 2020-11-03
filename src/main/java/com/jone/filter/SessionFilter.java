@@ -1,6 +1,7 @@
 package com.jone.filter;
 
 import org.springframework.http.HttpRequest;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +20,9 @@ public class SessionFilter implements Filter {
         HttpServletResponse response1 = (HttpServletResponse) response;
         HttpServletRequest request1 = (HttpServletRequest) request;
         HttpSession session = request1.getSession();
-        System.out.println("1111111111111111111session过滤......userName="+session.getAttribute("userName"));
-        if("".equals(session.getAttribute("userName")) || session.getAttribute("userName")==null){
-            System.out.println("222222222222222222session过滤......");
+
+        //if("".equals(session.getAttribute("userName")) || session.getAttribute("userName")==null){
+        if (StringUtils.isEmpty(session.getAttribute("username"))){
             response1.sendRedirect("/logon.jsp");
         }else{
             chain.doFilter(request,response);

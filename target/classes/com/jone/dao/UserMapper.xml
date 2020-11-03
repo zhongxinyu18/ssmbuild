@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--一个mapper关联一个接口,并且需要将此文件绑定到xml中-->
+<mapper namespace="com.jone.dao.UserMapper">
+    <insert id="addUser" parameterType="User">
+        insert into ssmbuild.user (userName, password, userPhone)
+        values (#{userName},#{password},#{userPhone});
+    </insert>
+
+    <delete id="delUserByID" parameterType="int">
+        delete from ssmbuild.user where userID=#{userID}
+    </delete>
+
+    <update id="updateUser" parameterType="User">
+        update ssmbuild.user
+        set userName=#{userName},password=#{password},userPhone=#{userPhone}
+        where  userID=#{userID};
+    </update>
+
+    <select id="queryUserByID" resultType="User">
+        select userID,userName,password,userPhone from ssmbuild.user where userID = #{userID};
+    </select>
+
+    <select id="queryUserByUP" resultType="User">
+        select userID,userName,password,userPhone
+        from ssmbuild.user where userName=#{userName} and password=#{password};
+    </select>
+</mapper>
